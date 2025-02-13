@@ -30,9 +30,8 @@ def s2a(input_filename, min_freq, max_freq, sample_rate, output_filename):
     empty_arry[freq_indices[0]:freq_indices[1],:] = resized_arry
     
     ranged_arry = empty_arry
-    
-
     audio_signal = librosa.core.spectrum.griffinlim(ranged_arry)
+    audio_signal /= np.max(np.abs(audio_signal),axis=0)
     sf.write(output_filename, audio_signal, sample_rate) 
  
 def main():
